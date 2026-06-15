@@ -7,11 +7,8 @@ test('GET - Return all comments', async ({}) => {
     const api = new RequestHandler()
 
     // in this case we doesnt have the queryParams
-    const a = api.url('https://gorest.co.in/public/v2').pathParams('/posts')
+    api.url('https://gorest.co.in/public/v2').pathParams('/posts')
     console.log('Get test')
-    console.log(a)
-    console.log('-------------------------------')
-    console.log('-------------------------------')
 })
 
 test('GET - Comments', async ({}) => {
@@ -20,11 +17,8 @@ test('GET - Comments', async ({}) => {
     const api = new RequestHandler()
 
     // with queryParams
-    const b = api.url('https://gorest.co.in/public/v2').pathParams('/posts').queryParams({body: 'Quia rem molestias'})
+    api.url('https://gorest.co.in/public/v2').pathParams('/posts').queryParams({body: 'Quia rem molestias'})
     console.log('Get test')
-    console.log(b)
-    console.log('-------------------------------')
-    console.log('-------------------------------')
 })
 
 test('POST - Create a new comment into a Posts', async ({}) => {
@@ -32,10 +26,9 @@ test('POST - Create a new comment into a Posts', async ({}) => {
 
     let postID: string = '12345'
 
-    const c = api
+    api
         .url('https://gorest.co.in/public/v2')
         .pathParams(`/posts/${postID}/comments`)
         .headers({Authorization: 'authToken'})
         .body({name: 'Comments', email: 'test@test.com', body: 'description'})
-    console.log(c)
 })

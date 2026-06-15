@@ -16,3 +16,7 @@ use the 'this.' to reference that the value to this var will be attach for each 
 7. Now, to use this methods we need to create a new instance from this file where we wants to use
 
 
+====
+
+Test Fixtures works as a pre-conditions, teardown, hooks
+
