@@ -1,6 +1,7 @@
 export class RequestHandler {
 
-    private attrBaseUrl: string = ''
+    private attrBaseUrl?: string
+    private attrDefaultBaseUrl: string = 'https://gorest.co.in/public/v2'
     private attrPath: string = ''
     private attrQueryParams: Object = {}
     private attrHeaders: Object = {}
@@ -29,6 +30,19 @@ export class RequestHandler {
     body(apiBody: Object){
         this.attrBody = apiBody
         return this
+    }
+
+    // method to build a complete API url - changing the object attr to string
+    private getUrl(){
+        // its means that when the this.attrBaseUrl is null or undefined the test will use the value from this.attrDefaultBaseUrl
+        const completeUrl = new URL(`${this.attrBaseUrl ?? this.attrDefaultBaseUrl}${this.attrPath}`)
+        
+        // this will convert our Object query params into a Array with key and value pairs
+        for(const [key, value] of Object.entries(this.queryParams)){
+            completeUrl.searchParams.append(key, value) // will add to the url
+        } 
+
+        return completeUrl.toString()
     }
 
 }
