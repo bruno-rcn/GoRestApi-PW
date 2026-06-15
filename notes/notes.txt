@@ -1,0 +1,18 @@
+(our costum) RequestHandler:
+Our costum file will be responsible to build our API request. To be more easier to work we will split the five main components from an API request and
+create a new method for each one. They are: url, path params, query params, header and body.
+
+1. Create the utils folder
+2. Create the request-handler file
+3. Crete the empty methods (url, pathParams, queryParams, header, body) to get from the test body what we need to perform the test
+4. Add the parameters to the methods. Ex: url(url: string){} / body(body: object) and create the attributes for this parameters Ex: private attrBaseUrl: string = ''
+5. Link the value from the attr to the method parameters. Ex: 
+    url(url: string){
+        this.attrBaseUrl = url
+    }
+use the 'this.' to reference that the value to this var will be attach for each instance for this class
+6. Add the line 'return this' to give access from this methods to the others inside the file
+
+7. Now, to use this methods we need to create a new instance from this file where we wants to use
+
+

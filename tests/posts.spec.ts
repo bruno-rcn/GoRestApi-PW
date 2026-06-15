@@ -115,7 +115,7 @@ test('GET - All posts', async ({request}) => {
     expect(getPostResponseBodyJSON[0]).toHaveProperty('body')
 })
 
-test('GET - Post with postID', async ({request}) => {
+test('GET - Return Post with postID created/authorized by a user', async ({request}) => {
     // Create a new post and Extract the postID
     const createPostsResponse = await request.post(`https://gorest.co.in/public/v2/users/${userID}/posts`, {
         data: {
@@ -146,7 +146,7 @@ test('GET - Post with postID', async ({request}) => {
     expect(getPostResponseByIDBodyJSON.body).toContain('Get request Body')
 })
 
-test('GET - Post created/authorized by a user', async ({request}) => {
+test('GET - Return Post with userID created/authorized by a user', async ({request}) => {
     // Create a new post and Extract the postID
     const createPostsResponse = await request.post(`https://gorest.co.in/public/v2/users/${userID}/posts`, {
         data: {
@@ -167,7 +167,6 @@ test('GET - Post created/authorized by a user', async ({request}) => {
     expect(getPostResponseByUserID.status()).toEqual(200)
 
     const getPostResponseByUserIDBodyJSON = await getPostResponseByUserID.json()
-    console.log(getPostResponseByUserIDBodyJSON)
 
     const post = Array.isArray(getPostResponseByUserIDBodyJSON) ? getPostResponseByUserIDBodyJSON[0] : getPostResponseByUserIDBodyJSON
     expect(post).toHaveProperty('id')
