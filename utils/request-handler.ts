@@ -1,11 +1,21 @@
+import { APIRequestContext } from '@playwright/test'
+
 export class RequestHandler {
 
     private attrBaseUrl?: string
-    private attrDefaultBaseUrl: string = 'https://gorest.co.in/public/v2'
+    private attrDefaultBaseUrl: string
     private attrPath: string = ''
     private attrQueryParams: Object = {}
     private attrHeaders: Object = {}
     private attrBody: Object = {}
+    private attrRequest: APIRequestContext
+
+    // Nox, every time we make a new instance for this class we will have to pass and access to the:
+    // request methods (post, put, get, delete) and the base url
+    constructor(request: APIRequestContext, apiBaseUrl: string){
+        this.attrRequest = request
+        this.attrDefaultBaseUrl = apiBaseUrl
+    }
 
     url(apiUrl: string){
         this.attrBaseUrl = apiUrl

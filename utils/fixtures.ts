@@ -12,8 +12,10 @@ export const test = base.extend<TestOptions>({
 
     // Key: value
     // inside the () we add the dependencies and the use function (its a special function from pw to wraps test execution)
-    api: async({}, use) => {
-        const reqHandler = new RequestHandler()
+    // Than, after made the construtor into the RequestHandler, we need to update here with the arguments
+    api: async({request}, use) => {
+        const baseUrl = 'https://gorest.co.in/public/v2'
+        const reqHandler = new RequestHandler(request, baseUrl)
         await use(reqHandler) // all code before this line execute as a pre-condition when the fixture is call on the test and after the line execute in the end of the test
     }
 
