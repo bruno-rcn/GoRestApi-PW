@@ -1,4 +1,4 @@
-import { APIRequestContext } from '@playwright/test'
+import { APIRequestContext, expect } from '@playwright/test'
 
 export class RequestHandler {
 
@@ -6,7 +6,7 @@ export class RequestHandler {
     private attrDefaultBaseUrl: string
     private attrPath: string = ''
     private attrQueryParams: Object = {}
-    private attrHeaders: Object = {}
+    private attrHeaders: Record<string, string> = {}
     private attrBody: Object = {}
     private attrRequest: APIRequestContext
 
@@ -32,7 +32,7 @@ export class RequestHandler {
         return this
     }
 
-    headers(apiHeaders: Object){
+    headers(apiHeaders: Record<string, string>){
         this.attrHeaders = apiHeaders
         return this
     }
@@ -53,6 +53,17 @@ export class RequestHandler {
         } 
 
         return completeUrl.toString()
+    }
+
+    async getRequest(statusCode: number){
+        const url = this.getUrl()
+        
+        const response = await this.attrRequest.get(url, {headers: this.attrHeaders})
+        expect(response.status()).toEqual(statusCode)
+
+        const responseJSON = await response.json()
+        
+        return responseJSON
     }
 
 }
